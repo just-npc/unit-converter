@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Length Converter</title>
+  </head>
+  <style>
+    @import url("https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap");
+
+    * {
+      padding: 0;
+      margin: 0;
+      box-sizing: border-box;
+      font-family: "Roboto Condensed", "Courier New", Courier, monospace;
+    }
+
+    body {
+      text-align: center;
+    }
+
+    h2 {
+      font-size: 2rem;
+      margin-bottom: 0.5rem;
+    }
+
+    main {
+      border: 3px solid black;
+      display: flex;
+      margin: auto;
+      width: fit-content;
+      padding: 1rem;
+      flex-direction: column;
+      border-radius: 5px;
+      /* height: 5rem; */
+    }
+
+    label {
+      font-size: 1.3rem;
+      font-weight: 600;
+    }
+
+    main > form {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    form > input {
+      padding: 0.3rem;
+      border: 3px solid black;
+      border-radius: 5px;
+    }
+
+    form > button,
+    select {
+      padding: 0.4rem;
+      font-size: 1rem;
+      cursor: pointer;
+      border: 3px solid black;
+      border-radius: 5px;
+    }
+    
+    p.convert-result {
+      font-size: 1rem;
+      margin-top: 1.3rem;
+      font-weight: 600;
+    }
+    </style>
+
+<body>
+  
+  <main>
+    <h2>Length Converter</h2>
+    {{if not .Converted }}
+
+    <form action="/length-convert" target="_self" method="post">
+      <label for="value">Enter the length to convert</label>
+      <input
+          type="number "
+          name="value"
+          id="value"
+          value="{{.Value}}"
+          required
+        />
+
+        <label for="from">unit to convert from</label>
+        <select name="from" id="from">
+          <option value="cm" {{if eq .From "cm"}} selected {{end}}>cm</option>
+          <option value="m" {{if eq .From "m"}} selected {{end}}>m</option>
+          <option value="km" {{if eq .From "km"}} selected {{end}}>km</option>
+          <option value="mm" {{if eq .From "mm"}} selected {{end}}>mm</option>
+          <option value="in" {{if eq .From "in"}} selected {{end}}>in</option>
+          <option value="ft" {{if eq .From "ft"}} selected {{end}}>foot</option>
+          <option value="yd" {{if eq .From "yd"}} selected {{end}}>yd(yard)</option>
+          <option value="mi" {{if eq .From "mi"}} selected {{end}}>mile(mile)</option>
+        </select>
+
+        <label for="to">unit to convert to</label>
+        <select name="to" id="to">
+          <option value="cm" {{if eq .To "cm"}} selected {{end}}>cm</option>
+          <option value="m" {{if eq .To "m"}} selected {{end}}>m</option>
+          <option value="km" {{if eq .To "km"}} selected {{end}}>km</option>
+          <option value="mm" {{if eq .To "mm"}} selected {{end}}>mm</option>
+          <option value="in" {{if eq .To "in"}} selected {{end}}>in</option>
+          <option value="ft" {{if eq .To "ft"}} selected {{end}}>foot</option>
+          <option value="yd" {{if eq .To "yd"}} selected {{end}}>yd(yard)</option>
+          <option value="mi" {{if eq .To "mi"}} selected {{end}}>mile(mile)</option>
+        </select>
+
+        <button type="submit">submit</button>
+      </form>
+
+      {{else}}
+          <p class="convert-result">result: {{.Result}}</p>
+      {{end}}
+    </main>
+
+  </body>
+</html>
